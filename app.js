@@ -115,7 +115,7 @@ class Store {
 }
 
 // Events: Display books
-document.addEventListener('DOMContentLoaded', UI.displayBooks)
+document.addEventListener('DOMContentLoaded', UI.displayBooks());
 
 // Events: Add book
 document.querySelector('#book-form').addEventListener('submit', (e) => {
@@ -151,8 +151,12 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 // Events: Remove book
 document.querySelector('#book-list').addEventListener('click', (e) => {
+	// delete book from UI
 	UI.deleteBook(e.target);
-
-	// displpay success message
+ 	
+ 	// delete book from localStorage
+ 	Store.removeBook(e.target.parentElement.previousElementSibling.value);
+	
+	// display success message
 	UI.showAlert('Book succesfully deleted', 'success');
 });
