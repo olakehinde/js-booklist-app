@@ -69,6 +69,9 @@ class UI {
 		const form  = document.querySelector('#book-form');
 
 		container.insertBefore(div, form);
+
+		// set 3sec timeout for the display
+		setTimeout(() => document.querySelector('.alert').remove(), 3000);
 	}
 
 	// Clear all input fields after submitting
