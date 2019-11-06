@@ -105,6 +105,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 		// Add new Book entry to UI
 		UI.addBooksTolist(book);
 
+		// displpay success message
+		UI.showAlert('Book succesfully added', 'success');
+
 		//	clear input fields
 		UI.clearFields(); 
 	}
@@ -115,4 +118,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 // Events: Remove book
 document.querySelector('#book-list').addEventListener('click', (e) => {
 	UI.deleteBook(e.target);
+
+	// displpay success message
+	UI.showAlert('Book succesfully deleted', 'success');
 });
