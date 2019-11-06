@@ -10,25 +10,25 @@ class Book {
 // UI class: Represents everything on the UI
 class UI {
 	static displayBooks() {
-		const StoredBooks = [
-			{
-				title: 'Book 1',
-				author: 'Ola Kehinde',
-				isbn: '89364598734'
-			},
-			{
-				title: 'Book 2',
-				author: 'Olu Jembe',
-				isbn: '9072572934'
-			},
-			{
-				title: 'Book 3',
-				author: 'Ade Kanmi',
-				isbn: '2137846358234979'
-			},
-		];
+		// const StoredBooks = [
+		// 	{
+		// 		title: 'Book 1',
+		// 		author: 'Ola Kehinde',
+		// 		isbn: '89364598734'
+		// 	},
+		// 	{
+		// 		title: 'Book 2',
+		// 		author: 'Olu Jembe',
+		// 		isbn: '9072572934'
+		// 	},
+		// 	{
+		// 		title: 'Book 3',
+		// 		author: 'Ade Kanmi',
+		// 		isbn: '2137846358234979'
+		// 	},
+		// ];
 
-		const books = StoredBooks;
+		const books = Store.getBooks();
 
 		books.forEach((book) => UI.addBooksTolist(book));
 	}
@@ -82,6 +82,37 @@ class UI {
 	}
 }
 // Store class: Handles data storage (Local Storage)
+class Store {
+	static getBooks() {
+		let books;
+		if (localStorage.getItem('books') === null) {
+			books = [];
+		}
+		else {
+			books = JSON.parse(localStorage.getItem('books'));
+		}
+
+		return books;
+	}
+
+	static addBook(book) {
+		const books = Store.getBooks();
+		books.push(book);
+		localStorage.setItem('books', JSON.stringify(books));
+	}
+
+	static removeBook(isbn) {
+		const books = Store.getBooks();
+
+		books.forEach((book, index) => {
+			if (books.isbn === isbn) {
+				books.splice(index, 1);
+			}
+		});
+		
+		localStorage.setItem('books', JSON.stringify(books));
+	}
+}
 
 // Events: Display books
 document.addEventListener('DOMContentLoaded', UI.displayBooks)
@@ -104,6 +135,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
 		// Add new Book entry to UI
 		UI.addBooksTolist(book);
+
+		// add Boko to LocalStorage
+		Store.addBook(book);
 
 		// displpay success message
 		UI.showAlert('Book succesfully added', 'success');
