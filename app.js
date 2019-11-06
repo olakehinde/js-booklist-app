@@ -10,24 +10,6 @@ class Book {
 // UI class: Represents everything on the UI
 class UI {
 	static displayBooks() {
-		// const StoredBooks = [
-		// 	{
-		// 		title: 'Book 1',
-		// 		author: 'Ola Kehinde',
-		// 		isbn: '89364598734'
-		// 	},
-		// 	{
-		// 		title: 'Book 2',
-		// 		author: 'Olu Jembe',
-		// 		isbn: '9072572934'
-		// 	},
-		// 	{
-		// 		title: 'Book 3',
-		// 		author: 'Ade Kanmi',
-		// 		isbn: '2137846358234979'
-		// 	},
-		// ];
-
 		const books = Store.getBooks();
 
 		books.forEach((book) => UI.addBooksTolist(book));
@@ -81,6 +63,7 @@ class UI {
 		document.querySelector('#isbn').value = '';
 	}
 }
+
 // Store class: Handles data storage (Local Storage)
 class Store {
 	static getBooks() {
@@ -115,7 +98,7 @@ class Store {
 }
 
 // Events: Display books
-document.addEventListener('DOMContentLoaded', UI.displayBooks());
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
 
 // Events: Add book
 document.querySelector('#book-form').addEventListener('submit', (e) => {
